@@ -43,7 +43,7 @@ describe('TEST TASK', () => {
       .then(res => res.data)
       .catch(err => err.response.data);
     catImage = result.file;
-    expect(result.file).to.match(/.jpe?g|.png|.mp4|.gif|.webm$/i);
+    expect(result.file).to.match(/\.(jpe?g|png|mp4|gif|webm|webp|tiff?)$/i);
   });
 
   it('should get API dog image url', async () => {
@@ -54,7 +54,7 @@ describe('TEST TASK', () => {
       .then(res => res.data)
       .catch(err => err.response.data);
     dogImage = result.url;
-    expect(result.url).to.match(/.jpe?g|.png|.mp4|.gif|.webm$/i);
+    expect(result.url).to.match(/\.(jpe?g|png|mp4|gif|webm|webp|tiff?)$/i);
   });
 
   it('should get API fox image url', async () => {
@@ -65,7 +65,7 @@ describe('TEST TASK', () => {
       .then(res => res.data)
       .catch(err => err.response.data);
     foxImage = result.image;
-    expect(result.image).to.match(/.jpe?g|.png|.mp4|.gif|.webm$/i);
+    expect(result.image).to.match(/\.(jpe?g|png|mp4|gif|webm|webp|tiff?)$/i);
   });
 
   it('should login in gmail', () => {
