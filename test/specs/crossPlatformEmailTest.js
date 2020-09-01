@@ -29,6 +29,7 @@ describe('TEST TASK', () => {
     userEmail = userName + '@getnada.com';
     browser.$('//input[@class="user_name"]').click();
     browser.$('//input[@class="user_name"]').keys(['Control', 'a']);
+    browser.$('//input[@class="user_name"]').keys('Delete');
     browser.$('//input[@class="user_name"]').setValue(userName);
 
     browser.$('//a[@class="button success"]').click();
