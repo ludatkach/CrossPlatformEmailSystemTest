@@ -1,6 +1,8 @@
 const { expect } = require('chai');
 import axios from 'axios';
 const fs = require('fs');
+import getnada from '../pageobjects/getnada.page';
+import {title, domainName} from '../data/getnada.data';
 
 let userEmail;
 let catImage;
