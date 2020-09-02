@@ -1,0 +1,15 @@
+{
+  "title": "Nada - temp mail - fast and free",
+  "domainName": "@getnada.com",
+  "hrefAttr": "href",
+  "imgDirPath": "./test/img",
+  "fileNameCat": "test/img/catImage.png",
+  "fileNameDog": "test/img/dogImage.png",
+  "fileNameFox": "test/img/foxImage.png",
+
+  "keys": {
+    "control": "Control",
+    "letterA":  "a",
+    "delete": "Delete"
+  }
+}

@@ -1,7 +1,7 @@
-import baseGetnada from './baseGetnada.page';
+import BaseGetnada from './BaseGetnada.page';
 
 
-class getnadaPage extends baseGetnada {
+class GetnadaPage extends BaseGetnada {
 
   get addInbox() { return browser.$('//i[@class="icon-plus"]');}
 
@@ -13,7 +13,8 @@ class getnadaPage extends baseGetnada {
 
   get email() { return browser.$('//li[@class="msg_item"]');}
 
-
-
+  open() {
+    super.open('https://getnada.com/');
+  }
 }
-export default new getnadaPage();
+export default new GetnadaPage();

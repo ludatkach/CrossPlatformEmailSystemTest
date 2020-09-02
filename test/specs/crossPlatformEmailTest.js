@@ -1,8 +1,9 @@
 const { expect } = require('chai');
 import axios from 'axios';
 const fs = require('fs');
-import getnada from '../pageobjects/getnada.page';
-import {title, domainName} from '../data/getnada.data';
+import Getnada from '../pageobjects/Getnada.page';
+import GetnadaIframePage from '../pageobjects/GetnadaIframe.page';
+import expected from '../data/expectedGetnada';
 
 let userEmail;
 let catImage;
@@ -15,27 +16,27 @@ let fileName;
 
 describe('TEST TASK', () => {
   before('go to getnada.com', () => {
-    browser.url('https://getnada.com');
+    Getnada.open();
     browser.maximizeWindow();
   });
 
   it('should have a right title ', () => {
-    expect(browser.getTitle()).eq('Nada - temp mail - fast and free');
+    expect(browser.getTitle()).eq(expected.title);
   });
 
   it('should create an email', () => {
-    browser.$('//i[@class="icon-plus"]').click();
-    let userName = browser.$('//input[@class="user_name"]').getValue();
+    browser.$(Getnada.addInbox).click();
+    let userName = browser.$(Getnada.userName).getValue();
     let d = new Date();
     userName = userName + d.getTime();
-    userEmail = userName + '@getnada.com';
-    browser.$('//input[@class="user_name"]').click();
-    browser.$('//input[@class="user_name"]').keys(['Control', 'a']);
-    browser.$('//input[@class="user_name"]').keys('Delete');
-    browser.$('//input[@class="user_name"]').setValue(userName);
+    userEmail = userName + expected.domainName;
+    browser.$(Getnada.userName).click();
+    browser.$(Getnada.userName.keys([expected.keys.control, expected.keys.letterA]));
+    browser.$(Getnada.userName).keys(expected.keys.delete);
+    browser.$(Getnada.userName).setValue(userName);
 
-    browser.$('//a[@class="button success"]').click();
-    expect(browser.$('//a[@class=" is-active"]//span').getText()).eq(userEmail);
+    browser.$(Getnada.acceptButton).click();
+    expect(browser.$(Getnada.activeEmail).getText()).eq(userEmail);
   });
 
   it('should get API cat image url', async () => {
@@ -98,48 +99,48 @@ describe('TEST TASK', () => {
   });
 
   it('should check email with 3 url in getnada email box', () => {
-    browser.switchWindow('https://getnada.com/');
-    browser.waitUntil(() => browser.$('//li[@class="msg_item"]').isClickable(), {
+    browser.switchWindow( Getnada.open());                       //'https://getnada.com/');
+    browser.waitUntil(() => browser.$(Getnada.email).isClickable(), {
       timeout: 120000,
     });
-    browser.$('//li[@class="msg_item"]').click();
-    browser.waitUntil(() => browser.$('//iframe[@id="idIframe"]').isDisplayed());
-    const emailFrame = browser.$('//iframe[@id="idIframe"]');
+    browser.$(Getnada.email).click();
+    browser.waitUntil(() => browser.$(GetnadaIframePage.iframe).isDisplayed());
+    const emailFrame = browser.$(GetnadaIframePage.iframe);
     browser.switchToFrame(emailFrame);
     browser.waitUntil(() => browser.$('//a[text()="' + catImage + '"]').isDisplayed());
     browser.waitUntil(() => browser.$('//a[text()="' + dogImage + '"]').isDisplayed());
     browser.waitUntil(() => browser.$('//a[text()="' + foxImage + '"]').isDisplayed());
-    catUrl = browser.$('//div[@dir="ltr"]/a').getAttribute('href');
-    dogUrl = browser.$('(//div[@dir="ltr"]/div/a)[1]').getAttribute('href');
-    foxUrl = browser.$('(//div[@dir="ltr"]/div/a)[2]').getAttribute('href');
+    catUrl = browser.$(GetnadaIframePage.catUrl).getAttribute(expected.hrefAttr);
+    dogUrl = browser.$(GetnadaIframePage.dogUrl).getAttribute(expected.hrefAttr);
+    foxUrl = browser.$(GetnadaIframePage.foxUrl).getAttribute(expected.hrefAttr);
     expect(catUrl).eq(catImage);
     expect(dogUrl).eq(dogImage);
     expect(foxUrl).eq(foxImage);
   });
 
   it('should create img directory', () => {
-    if (!fs.existsSync('./test/img')) {
-      fs.mkdirSync('./test/img');
+    if (!fs.existsSync(expected.imgDirPath)) {
+      fs.mkdirSync(expected.imgDirPath);
     }
-    expect(fs.existsSync('./test/img')).eq(true);
+    expect(fs.existsSync(expected.imgDirPath)).eq(true);
   });
 
   it('should take screenshot of cat image and save to a file', () => {
-    fileName = 'test/img/catImage.png';
+    fileName = expected.fileNameCat;
     browser.url(catUrl);
     browser.saveScreenshot(fileName);
     expect(fs.existsSync(fileName)).eq(true);
   });
 
   it('should take screenshot of dog image and save to a file', () => {
-    fileName = 'test/img/dogImage.png';
+    fileName = expected.fileNameDog;
     browser.url(dogUrl);
     browser.saveScreenshot(fileName);
     expect(fs.existsSync(fileName)).eq(true);
   });
 
   it('should take screenshot of fox image and save to a file', () => {
-    fileName = 'test/img/foxImage.png';
+    fileName = expected.fileNameFox;
     browser.url(foxUrl);
     browser.saveScreenshot(fileName);
     expect(fs.existsSync(fileName)).eq(true);
