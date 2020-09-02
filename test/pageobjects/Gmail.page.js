@@ -1,6 +1,6 @@
-import  BaseGmail from 'BaseGmail.page';
+import  BasePage from './Base.page';
 
-class GmailPage  extends BaseGmail{
+class GmailPage  extends BasePage{
 
   get gmailUserName() { return browser.$('//input[@id="identifierId"]');}
 

@@ -1,6 +1,6 @@
-import BaseGetnada from './BaseGetnada.page';
+import BasePage from './Base.page';
 
-class GetnadaIframePage extends BaseGetnada {
+class GetnadaIframePage extends BasePage {
 
   get iframe() { return browser.$('//iframe[@id="idIframe"]');}
 

@@ -1,9 +1,11 @@
 const { expect } = require('chai');
 import axios from 'axios';
 const fs = require('fs');
-import Getnada from '../pageobjects/Getnada.page';
+import GetnadaPage from '../pageobjects/Getnada.page';
 import GetnadaIframePage from '../pageobjects/GetnadaIframe.page';
+import GmailPage from '../pageobjects/Gmail.page';
 import expected from '../data/expectedGetnada';
+import expectedGmail from '../data/expectedGmail';
 
 let userEmail;
 let catImage;
@@ -16,7 +18,7 @@ let fileName;
 
 describe('TEST TASK', () => {
   before('go to getnada.com', () => {
-    Getnada.open();
+    GetnadaPage.open();
     browser.maximizeWindow();
   });
 
@@ -25,18 +27,18 @@ describe('TEST TASK', () => {
   });
 
   it('should create an email', () => {
-    browser.$(Getnada.addInbox).click();
-    let userName = browser.$(Getnada.userName).getValue();
+    GetnadaPage.addInbox.click();
+    let userName = GetnadaPage.userName.getValue();
     let d = new Date();
     userName = userName + d.getTime();
     userEmail = userName + expected.domainName;
-    browser.$(Getnada.userName).click();
-    browser.$(Getnada.userName.keys([expected.keys.control, expected.keys.letterA]));
-    browser.$(Getnada.userName).keys(expected.keys.delete);
-    browser.$(Getnada.userName).setValue(userName);
+    GetnadaPage.userName.click();
+    GetnadaPage.userName.keys([expected.keys.control, expected.keys.letterA]);
+    GetnadaPage.userName.keys(expected.keys.delete);
+    GetnadaPage.userName.setValue(userName);
 
-    browser.$(Getnada.acceptButton).click();
-    expect(browser.$(Getnada.activeEmail).getText()).eq(userEmail);
+    GetnadaPage.acceptButton.click();
+    expect(GetnadaPage.activeEmail.getText()).eq(userEmail);
   });
 
   it('should get API cat image url', async () => {
@@ -75,44 +77,42 @@ describe('TEST TASK', () => {
   it('should login in gmail', () => {
     let gmailUserName = process.env.GMAILUSERNAME;
     let gmailUserPassword = process.env.GMAILUSERPASSWORD;
-    browser.newWindow('https://mail.google.com');
+    browser.newWindow(expectedGmail.path);
     browser.maximizeWindow();
-    browser.$('//input[@id="identifierId"]').setValue(gmailUserName);
-    browser.$('//div[@class="VfPpkd-RLmnJb"]').click();
-    browser.waitUntil(() => browser.$('//input[@type="password"]').isDisplayed());
-    browser.$('//input[@class="whsOnd zHQkBf"]').setValue(gmailUserPassword);
-    browser.$('//div[@class="VfPpkd-RLmnJb"]').click();
-    browser.waitUntil(() => browser.$('//img[@class="gb_va"]').isDisplayed());
-    expect(browser.$('//div[@class="T-I T-I-KE L3"]').isClickable()).eq(true);
+    GmailPage.gmailUserName.setValue(gmailUserName);
+    GmailPage.NextButton.click();
+    browser.waitUntil(() => GmailPage.gmailUserPassword.isDisplayed());
+    GmailPage.gmailUserPassword.setValue(gmailUserPassword);
+    GmailPage.NextButton.click();
+    browser.waitUntil(() => GmailPage.logoGmail.isDisplayed());
+    expect(GmailPage.addCompose.isClickable()).eq(true);
   });
 
   it('should create letter in gmail account and send it to getnada email account', () => {
-    browser.$('//div[@class="T-I T-I-KE L3"]').click();
-    browser.$('//textarea[@class="vO"]').setValue(userEmail);
-    browser.$('//input[@name="subjectbox"]').setValue('My favorite animals');
-    browser
-      .$('//div[@class="Am Al editable LW-avf tS-tW"]')
-      .setValue(catImage + '\n' + dogImage + '\n' + foxImage);
-    browser.$('//div[text()="Send"]').click();
-    browser.waitUntil(() => browser.$('//span[text()="Message sent."]').isDisplayed());
-    expect(browser.$('//div[@class="vh"]//span[@class="aT"]').isDisplayed()).eq(true);
+    GmailPage.addCompose.click();
+    GmailPage.userEmailAnotherDomain.setValue(userEmail);
+    GmailPage.subjectMessage.setValue(expectedGmail.subject);
+    GmailPage.mailArea.setValue(catImage + '\n' + dogImage + '\n' + foxImage);
+    GmailPage.sendButton.click();
+    browser.waitUntil(() => GmailPage.confirmMessage.isDisplayed());
+    expect(GmailPage.confirmMessageBox.isDisplayed()).eq(true);
   });
 
   it('should check email with 3 url in getnada email box', () => {
-    browser.switchWindow( Getnada.open());                       //'https://getnada.com/');
-    browser.waitUntil(() => browser.$(Getnada.email).isClickable(), {
+    browser.switchWindow( expected.path);                       //'https://getnada.com/');
+    browser.waitUntil(() => GetnadaPage.email.isClickable(), {
       timeout: 120000,
     });
-    browser.$(Getnada.email).click();
-    browser.waitUntil(() => browser.$(GetnadaIframePage.iframe).isDisplayed());
-    const emailFrame = browser.$(GetnadaIframePage.iframe);
+    GetnadaPage.email.click();
+    browser.waitUntil(() => GetnadaIframePage.iframe.isDisplayed());
+    const emailFrame = GetnadaIframePage.iframe;
     browser.switchToFrame(emailFrame);
     browser.waitUntil(() => browser.$('//a[text()="' + catImage + '"]').isDisplayed());
     browser.waitUntil(() => browser.$('//a[text()="' + dogImage + '"]').isDisplayed());
     browser.waitUntil(() => browser.$('//a[text()="' + foxImage + '"]').isDisplayed());
-    catUrl = browser.$(GetnadaIframePage.catUrl).getAttribute(expected.hrefAttr);
-    dogUrl = browser.$(GetnadaIframePage.dogUrl).getAttribute(expected.hrefAttr);
-    foxUrl = browser.$(GetnadaIframePage.foxUrl).getAttribute(expected.hrefAttr);
+    catUrl = GetnadaIframePage.catUrl.getAttribute(expected.hrefAttr);
+    dogUrl = GetnadaIframePage.dogUrl.getAttribute(expected.hrefAttr);
+    foxUrl = GetnadaIframePage.foxUrl.getAttribute(expected.hrefAttr);
     expect(catUrl).eq(catImage);
     expect(dogUrl).eq(dogImage);
     expect(foxUrl).eq(foxImage);
