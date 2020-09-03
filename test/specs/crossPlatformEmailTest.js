@@ -79,11 +79,12 @@ describe('TEST TASK', () => {
     let gmailUserPassword = process.env.GMAILUSERPASSWORD;
     browser.newWindow(expectedGmail.path);
     browser.maximizeWindow();
+
     GmailPage.gmailUserName.setValue(gmailUserName);
-    GmailPage.NextButton.click();
+    GmailPage.emailNextButton.click();
     browser.waitUntil(() => GmailPage.gmailUserPassword.isDisplayed());
     GmailPage.gmailUserPassword.setValue(gmailUserPassword);
-    GmailPage.NextButton.click();
+    GmailPage.passwordNextButton.click();
     browser.waitUntil(() => GmailPage.logoGmail.isDisplayed());
     expect(GmailPage.addCompose.isClickable()).eq(true);
   });

@@ -4,9 +4,11 @@ class GmailPage  extends BasePage{
 
   get gmailUserName() { return browser.$('//input[@id="identifierId"]');}
 
-  get NextButton() { return browser.$('//div[@class="VfPpkd-RLmnJb"]');}
+  get emailNextButton() { return browser.$('//div[@id="identifierNext"]');}
 
-  get gmailUserPassword() { return browser.$('//input[@class="whsOnd zHQkBf"]');}
+  get gmailUserPassword() { return browser.$('//input[@type="password"]');}
+
+  get passwordNextButton() { return browser.$('//div[@id="passwordNext"]');}
 
   get logoGmail() { return browser.$('//img[@class="gb_va"]');}
 
