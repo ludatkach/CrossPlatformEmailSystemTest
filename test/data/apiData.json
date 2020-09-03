@@ -1,0 +1,11 @@
+{
+  "methods": {
+    "get": "get"
+  },
+
+  "urls": {
+    "catUrl": "http://aws.random.cat/meow",
+    "dogUrl": "http://random.dog/woof.json",
+    "foxUrl": "http://randomfox.ca/floof/"
+  }
+}

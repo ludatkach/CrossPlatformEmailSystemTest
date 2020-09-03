@@ -6,6 +6,7 @@ import GetnadaIframePage from '../pageobjects/GetnadaIframe.page';
 import GmailPage from '../pageobjects/Gmail.page';
 import expected from '../data/expectedGetnada';
 import expectedGmail from '../data/expectedGmail';
+import apiData from '../data/apiData';
 
 let userEmail;
 let catImage;
@@ -43,8 +44,8 @@ describe('TEST TASK', () => {
 
   it('should get API cat image url', async () => {
     const result = await axios({
-      method: 'get',
-      url: 'http://aws.random.cat/meow',
+      method: apiData.methods.get,
+      url: apiData.urls.catUrl,
     })
       .then(res => res.data)
       .catch(err => err.response.data);
@@ -54,8 +55,8 @@ describe('TEST TASK', () => {
 
   it('should get API dog image url', async () => {
     const result = await axios({
-      method: 'get',
-      url: 'http://random.dog/woof.json',
+      method: apiData.methods.get,
+      url: apiData.urls.dogUrl,
     })
       .then(res => res.data)
       .catch(err => err.response.data);
@@ -65,8 +66,8 @@ describe('TEST TASK', () => {
 
   it('should get API fox image url', async () => {
     const result = await axios({
-      method: 'get',
-      url: 'http://randomfox.ca/floof/',
+      method: apiData.methods.get,
+      url: apiData.urls.foxUrl,
     })
       .then(res => res.data)
       .catch(err => err.response.data);
