@@ -12,5 +12,10 @@
     "control": "Control",
     "letterA":  "a",
     "delete": "Delete"
+  },
+
+  "urlParts": {
+    "urlBegin": "//a[text()=\"",
+    "urlEnd": "\"]"
   }
 }

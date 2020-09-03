@@ -108,9 +108,9 @@ describe('TEST TASK', () => {
     browser.waitUntil(() => GetnadaIframePage.iframe.isDisplayed());
     const emailFrame = GetnadaIframePage.iframe;
     browser.switchToFrame(emailFrame);
-    browser.waitUntil(() => browser.$('//a[text()="' + catImage + '"]').isDisplayed());
-    browser.waitUntil(() => browser.$('//a[text()="' + dogImage + '"]').isDisplayed());
-    browser.waitUntil(() => browser.$('//a[text()="' + foxImage + '"]').isDisplayed());
+    browser.waitUntil(() => browser.$(expected.urlParts.urlBegin + catImage + expected.urlParts.urlEnd).isDisplayed());
+    browser.waitUntil(() => browser.$(expected.urlParts.urlBegin + dogImage + expected.urlParts.urlEnd).isDisplayed());
+    browser.waitUntil(() => browser.$(expected.urlParts.urlBegin + foxImage + expected.urlParts.urlEnd).isDisplayed());
     catUrl = GetnadaIframePage.catUrl.getAttribute(expected.hrefAttr);
     dogUrl = GetnadaIframePage.dogUrl.getAttribute(expected.hrefAttr);
     foxUrl = GetnadaIframePage.foxUrl.getAttribute(expected.hrefAttr);
