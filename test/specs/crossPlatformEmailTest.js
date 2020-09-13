@@ -9,6 +9,7 @@ import expectedGmail from '../data/expectedGmail';
 import apiData from '../data/apiData';
 
 let userEmail;
+let regExpObj;
 let catImage;
 let dogImage;
 let foxImage;
@@ -37,7 +38,6 @@ describe('TEST TASK', () => {
     GetnadaPage.userName.keys([expected.keys.control, expected.keys.letterA]);
     GetnadaPage.userName.keys(expected.keys.delete);
     GetnadaPage.userName.setValue(userName);
-
     GetnadaPage.acceptButton.click();
     expect(GetnadaPage.activeEmail.getText()).eq(userEmail);
   });
@@ -50,7 +50,8 @@ describe('TEST TASK', () => {
       .then(res => res.data)
       .catch(err => err.response.data);
     catImage = result.file;
-    expect(result.file).to.match(/\.(jpe?g|png|mp4|gif|webm|webp|tiff?)$/i);
+    regExpObj = new RegExp(apiData.regex.regexMatch, apiData.regex.regexFlagI);
+    expect(result.file).to.match(regExpObj);
   });
 
   it('should get API dog image url', async () => {
@@ -61,7 +62,8 @@ describe('TEST TASK', () => {
       .then(res => res.data)
       .catch(err => err.response.data);
     dogImage = result.url;
-    expect(result.url).to.match(/\.(jpe?g|png|mp4|gif|webm|webp|tiff?)$/i);
+    regExpObj = new RegExp(apiData.regex.regexMatch, apiData.regex.regexFlagI);
+    expect(result.url).to.match(regExpObj);
   });
 
   it('should get API fox image url', async () => {
@@ -72,7 +74,8 @@ describe('TEST TASK', () => {
       .then(res => res.data)
       .catch(err => err.response.data);
     foxImage = result.image;
-    expect(result.image).to.match(/\.(jpe?g|png|mp4|gif|webm|webp|tiff?)$/i);
+    regExpObj = new RegExp(apiData.regex.regexMatch, apiData.regex.regexFlagI);
+    expect(result.image).to.match(regExpObj);
   });
 
   it('should login in gmail', () => {
@@ -101,7 +104,7 @@ describe('TEST TASK', () => {
   });
 
   it('should check email with 3 url in getnada email box', () => {
-    browser.switchWindow( expected.path);                       //'https://getnada.com/');
+    browser.switchWindow( expected.path);
     browser.waitUntil(() => GetnadaPage.email.isClickable(), {
       timeout: 120000,
     });

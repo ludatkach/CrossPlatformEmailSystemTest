@@ -7,5 +7,9 @@
     "catUrl": "http://aws.random.cat/meow",
     "dogUrl": "http://random.dog/woof.json",
     "foxUrl": "http://randomfox.ca/floof/"
+  },
+  "regex": {
+    "regexMatch": "\\.(jpe?g|png|mp4|gif|webm|webp|tiff?)$",
+    "regexFlagI": "i"
   }
 }

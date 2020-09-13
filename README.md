@@ -1,9 +1,9 @@
 ## CrossPlatformEmailSystemTest
 ### Task
 * Open browser and go to https://getnada.com. Generate new email adress and save it.
-* Get random API links from [RandomCat](https://getnada.com), [RandomDog](https://random.dog/woof.json), [RandomFox](https://randomfox.ca/floof/) 
+* Get random API links from [RandomCat](https://aws.random.cat/meow), [RandomDog](https://random.dog/woof.json), [RandomFox](https://randomfox.ca/floof/) 
 * Send email with these three links from gmail account to email from Step1 (getnada.com)
-* Wait until letter come to  https://getnada.com  and check if it has  three urls.
+* Wait until a letter come to  https://getnada.com  and check if it has  three urls.
 * Click on each link in email, make screenshot of each image and save it to some directory.
 ### Technologies
 The project created on Node.js platform with WebDriverIO and Chai assertion library
@@ -15,6 +15,10 @@ To use this project, perform the following steps:
 4. Run `npm install`
 
 #### To run tests:
+* Create gmail test account 
+* Define the folloving environment variables:
+    1. GMAILUSERNAME
+    2. GMAILUSERPASSWORD
 * Run `npm test`
 
 ### **WebDriverIO v6 project setup from scratch:**
