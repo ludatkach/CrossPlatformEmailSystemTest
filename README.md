@@ -1,4 +1,4 @@
-## CrossPlatformEmailsTest
+## CrossPlatformEmailSystemTest
 ### Task
 * Open browser and go to https://getnada.com. Generate new email adress and save it.
 * Get random API links from [RandomCat](https://getnada.com), [RandomDog](https://random.dog/woof.json), [RandomFox](https://randomfox.ca/floof/) 
