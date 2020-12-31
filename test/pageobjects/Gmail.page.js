@@ -10,7 +10,7 @@ class GmailPage  extends BasePage{
 
   get passwordNextButton() { return browser.$('//div[@id="passwordNext"]');}
 
-  get logoGmail() { return browser.$('//img[@class="gb_va"]');}
+  get logoGmail() { return browser.$('//img[@class="gb_uc"]');}
 
   get addCompose() { return browser.$('//div[@class="T-I T-I-KE L3"]');}
 

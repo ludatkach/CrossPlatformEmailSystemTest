@@ -31,15 +31,16 @@ describe('TEST TASK', () => {
   it('should create an email', () => {
     GetnadaPage.addInbox.click();
     let userName = GetnadaPage.userName.getValue();
+    let domain = GetnadaPage.domain.getValue();
     let d = new Date();
     userName = userName + d.getTime();
-    userEmail = userName + expected.domainName;
+    userEmail = userName + expected.atChar + domain;
     GetnadaPage.userName.click();
     GetnadaPage.userName.keys([expected.keys.control, expected.keys.letterA]);
     GetnadaPage.userName.keys(expected.keys.delete);
     GetnadaPage.userName.setValue(userName);
     GetnadaPage.acceptButton.click();
-    expect(GetnadaPage.activeEmail.getText()).eq(userEmail);
+    expect(GetnadaPage.activeEmail.getText()).eq(expected.waitingMessage + userEmail);
   });
 
   it('should get API cat image url', async () => {

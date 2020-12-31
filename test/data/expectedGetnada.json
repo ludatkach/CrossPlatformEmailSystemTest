@@ -1,7 +1,9 @@
 {
-  "title": "Nada - temp mail - fast and free",
+  "title": "nada - Disposable Temp Email",
   "path": "https://getnada.com/",
   "domainName": "@getnada.com",
+  "waitingMessage": "waiting for incoming emails for ",
+  "atChar": "@",
   "hrefAttr": "href",
   "imgDirPath": "./test/img",
   "fileNameCat": "test/img/catImage.png",

@@ -3,13 +3,14 @@ import BasePage from './Base.page';
 
 class GetnadaPage extends BasePage {
 
-  get addInbox() { return browser.$('//li[@class="items-center"]//button');} // '//i[@class="icon-plus"]');}
+  get addInbox() { return browser.$('//li[@class="items-center"]//button');}
+  get userName() { return browser.$('//input[@id="grid-first-name"]');}
 
-  get userName() { return browser.$('//input[@id="grid-first-name"]');} // //input[@class="user_name"]');}
+  get domain() { return browser.$('//select');}
 
-  get acceptButton() { return browser.$('//form/button[@type="button"]');}    // //a[@class="button success"]');}
+  get acceptButton() { return browser.$('//form/button[@type="button"]');}
 
-  get activeEmail() { return browser.$('//a[@class=" is-active"]//span');}
+  get activeEmail() { return browser.$('//p[@class="p-3"]');}
 
   get email() { return browser.$('//li[@class="msg_item"]');}
 

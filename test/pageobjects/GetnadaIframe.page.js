@@ -2,7 +2,7 @@ import BasePage from './Base.page';
 
 class GetnadaIframePage extends BasePage {
 
-  get iframe() { return browser.$('//iframe[@id="idIframe"]');}
+  get iframe() { return browser.$('//iframe[@id="the_message_iframe"]');}
 
   get catUrl() { return browser.$('//div[@dir="ltr"]/a');}
 
