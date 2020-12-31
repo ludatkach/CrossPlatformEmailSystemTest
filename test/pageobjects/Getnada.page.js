@@ -12,7 +12,7 @@ class GetnadaPage extends BasePage {
 
   get activeEmail() { return browser.$('//p[@class="p-3"]');}
 
-  get email() { return browser.$('//li[@class="msg_item"]');}
+  get email() { return browser.$('//a[text()="My favorite animals"]');}
 
   open() {
     super.open('https://getnada.com');
